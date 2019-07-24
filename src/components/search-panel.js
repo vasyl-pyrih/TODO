@@ -2,7 +2,7 @@ import React from 'react';
 
 const SearchPanel = () => {
 
-    const searchText = 'Type to search'
+    const searchText = 'Type to search...'
     const searchStyle = {
         fontSize: '25px'
     };
