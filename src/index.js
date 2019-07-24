@@ -9,9 +9,9 @@ import TodoList from './components/todo-list';
 const App = () => {
 
     const todoData = [
-        {label: 'python', important: false},
-        {label: 'js', important: false},
-        {label: 'react', important: true}
+        {label: 'python', important: false, id: 1},
+        {label: 'js', important: false, id: 2},
+        {label: 'react', important: true, id: 3}
     ]
 
     return (
@@ -24,3 +24,5 @@ const App = () => {
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
+
+// 30
