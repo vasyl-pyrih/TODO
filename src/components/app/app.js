@@ -36,7 +36,6 @@ export default class App extends Component {
         }
     }
 
-
     addItem = (text) => {
         // generate id
         const newItem = this.createTodoItem(text);
@@ -80,7 +79,27 @@ export default class App extends Component {
     }
 
     onToggleDone = (id) => {
-        console.log('done', id);
+
+        this.setState(({ todoData }) => {
+            const idx = todoData.findIndex((el) => el.id === id);
+            
+            // 1. update object
+            const oldItem = todoData[idx];
+            const newItem = {...oldItem, done: !oldItem.done}
+
+            // 2. constarust new array
+            const newArray = [
+                ...todoData.slice(0, idx),
+                newItem,
+                ...todoData.slice(idx + 1)
+            ];
+
+            return {
+                todoData: newArray
+            }
+
+        });
+       
     }
 
     render() {
