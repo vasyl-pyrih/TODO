@@ -22,7 +22,8 @@ export default class App extends Component {
                 this.createTodoItem('Python'),
                 this.createTodoItem('Django'),
                 this.createTodoItem('JS'),
-            ]
+            ],
+            term: ''
         }
 
     }
@@ -114,9 +115,29 @@ export default class App extends Component {
        
     }
 
+    onSearchChange = (term) => {
+        this.setState({ term });
+    };
+
+    search (items, term) {
+        if (term.length === 0) {
+            return items;
+        }
+
+        return items.filter((item) => {
+           
+            //return all elements contains sting term
+            return item.label
+                    .toLowerCase()
+                    .indexOf(term.toLowerCase()) > -1;
+        });
+    }
+
     render() {
 
-        const { todoData } = this.state;
+        const { todoData, term } = this.state;
+
+        const visibleItems = this.search(todoData, term);
 
         const doneCount = todoData.filter((el) => el.done).length;
 
@@ -125,10 +146,11 @@ export default class App extends Component {
         return (
             <div className="todo-app">
                 <AppHeader toDo={todoCount} done={doneCount} />
-                <SearchPanel />
+                <SearchPanel 
+                    onSearchChange={this.onSearchChange} />
                 <ItemStatusFilter />
                 <TodoList 
-                    todos={ todoData }
+                    todos={ visibleItems }
                     onDeleted={ this.deleteItem } 
                     onToggleImportant={ this.onToggleImportant }
                     onToggleDone={ this.onToggleDone }    
