@@ -19,21 +19,27 @@ export default class App extends Component {
 
         this.state = {
             todoData: [
-                {label: 'python', important: false, id: 1},
-                {label: 'js', important: false, id: 2},
-                {label: 'react', important: true, id: 3}
+                this.createTodoItem('Python'),
+                this.createTodoItem('Django'),
+                this.createTodoItem('JS'),
             ]
         }
 
     }
 
+    createTodoItem(label) {
+        return {
+            label,
+            important: false,
+            done: false,
+            id: this.maxId++
+        }
+    }
+
+
     addItem = (text) => {
         // generate id
-        const newItem = {
-            label: text,
-            important: false,
-            id: this.maxId++
-        };
+        const newItem = this.createTodoItem(text);
 
         // add elem in array
         this.setState(({ todoData }) => {
@@ -86,8 +92,8 @@ export default class App extends Component {
                 <TodoList 
                     todos={ this.state.todoData }
                     onDeleted={ this.deleteItem } 
-                    onToggleImportant={this.onToggleImportant}
-                    onToggleDone={this.onToggleDone}    
+                    onToggleImportant={ this.onToggleImportant }
+                    onToggleDone={ this.onToggleDone }    
                 />
                 <ItemAddForm 
                     onItemAdded={ this.addItem  } />
