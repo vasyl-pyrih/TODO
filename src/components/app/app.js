@@ -24,7 +24,7 @@ export default class App extends Component {
                 this.createTodoItem('JS'),
             ],
             term: '',
-            filter: 'all' //active, all or done
+            filter: 'all' // can be active, all or done
         }
 
     }
